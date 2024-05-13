@@ -5,9 +5,7 @@ class ArchiveScreen {
     private var scanner = Scanner(System.`in`)
     fun showMenu(archives: MutableList<Archive>) { // Вывод пунктов меню
         println("0 Создать архив")
-        for (archive in archives) {
-            println("${archives.indexOf(archive) + 1} $archive") //кривой вывод, допилить!!!
-        }
+        archives.forEachIndexed { index, archive -> println("${index+1} ${archive.name}") }
         println("${archivesList.size + 1} Выход")
     }
 
@@ -15,30 +13,29 @@ class ArchiveScreen {
         while (true) {
             println("Введите цифру, соответствующую нужной команде или выбранному архиву:")
             showMenu(archivesList)
-            // тут как-то надо создать экземпляр сканера
             if (!scanner.hasNextInt()) {
                 println("" +
                         "Некорректный ввод! Команда должна быть целым числом из списка ниже.")
                 scanner.nextLine()
             } else {
                 var command = scanner.nextInt()
-                if (command < 0 || command > archivesList.size + 1) {
+                if (!(command < 0 || command > archivesList.size + 1)) {
+                 when (command) {
+                        0 -> createNewArchive()
+                        archivesList.size + 1 -> {
+                            println("Работа программы завершена. Отличного дня!")
+                            break
+                        }
+                        else -> openArchive(archivesList[(command - 1)]) // - зайти внутрь архива, номер которого выберет юзер
+                    }
+                } else {
                     println("" +
                             "Некорректный ввод! Команда должна быть целым числом из списка ниже.")
+                    scanner.nextLine()
                 }
-                else whatToDo(command)
             }
         }
     }
-
-
-            fun whatToDo(command: Int) {// выполнение определённых операций на выбор пункта меню.
-            when (command) {
-                0 -> createNewArchive()
-                archivesList.size + 1 -> return  //выход из программы. Не работает!!!! :(
-                else -> openArchive(archivesList[(command-1)]) // - зайти внутрь архива, номер которого выберет юзер
-            }
-        }
 
     fun createNewArchive() {
         println("Введите название нового архива:")
