@@ -23,7 +23,7 @@ class Menu <E> where E:Elements {
             }
         }
     }
-        private fun showMenu(list: MutableList<E>, type: String) { // Вывод пунктов меню. В принципе, код универсальный.
+        private fun showMenu(list: MutableList<E>, type: String) { // Вывод пунктов меню.
             if (type == "Архив") println("0 Создать новый архив")
             if (type == "Заметка") println("0 Создать новую заметку")
                list.forEachIndexed { index, element -> println("${index + 1} ${element.name}") }
@@ -31,21 +31,13 @@ class Menu <E> where E:Elements {
 
     }
 
-    private fun whatToDo(
-            command: Int,
-            list: MutableList<E>,
-            type: String
-         //   create: (String) -> Elements,
-         //   open: (String) -> Unit
-    ) {
+    private fun whatToDo(command: Int, list: MutableList<E>, type: String) { // Обработка введённой команды
         when (command) {
             0 -> {
                 if (type == "Архив") archiveScreen.createNewArchive()
                 if (type == "Заметка"&&currentArchive!=null) notesScreen.createNote(currentArchive)
             }
-
             else -> list[(command-1)].open()
-
         }
     }
 }

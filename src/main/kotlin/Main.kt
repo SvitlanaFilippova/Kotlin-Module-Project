@@ -1,4 +1,3 @@
-import java.util.Scanner
 var archivesList: MutableList<Archive> = mutableListOf()
 val archiveScreen = ArchiveScreen()
 val notesScreen = NotesScreen()

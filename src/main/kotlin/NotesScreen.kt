@@ -5,7 +5,6 @@ class NotesScreen {
         currentArchive = archive
         println("Вы находитесь внутри архива ${archive.name}. Можете добавить в него новую заметку или просмотреть ранее добавленные.")
         menuNotes.checkCommand(archive.notesList, "Заметка")
-
     }
 
     fun createNote(archive: Archive?) {
@@ -26,7 +25,6 @@ class NotesScreen {
                     } else println("Текст заметки не может быть пустым!")
                 }
             } else println("Название не может быть пустым!")
-
         }
     }
 }

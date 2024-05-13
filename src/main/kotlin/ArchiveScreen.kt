@@ -1,9 +1,7 @@
 import java.util.Scanner
 
 class ArchiveScreen {
-
     private var scanner = Scanner(System.`in`)
-
     fun createNewArchive() {
         while (true) {
             println("Введите название нового архива:")
